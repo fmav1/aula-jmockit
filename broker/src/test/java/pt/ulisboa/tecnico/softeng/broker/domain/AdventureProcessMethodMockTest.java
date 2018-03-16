@@ -60,8 +60,6 @@ public class AdventureProcessMethodMockTest {
 		Assert.assertEquals(ACTIVITY_REFERENCE, adventure.getActivityBooking());
 	}
 	
-	// BankInterface.processPayment lanca uma BankException
-	
 	@Test
 	public void processWithBankException(@Mocked final BankInterface bankInterface,
 			@Mocked final HotelInterface hotelInterface, @Mocked final ActivityInterface activityInterface) {
@@ -69,13 +67,9 @@ public class AdventureProcessMethodMockTest {
 			{
 				BankInterface.processPayment(IBAN, 300);
 				this.result = new BankException();
-				
 			}
 		};
-		/* vai ter de haver um BExcept
-		 * processPayment vai ser chamado mas nao e' executado, retorna a excepcao
-		 * 
-		 */
+		
 		Adventure adventure = new Adventure(this.broker, this.begin, this.end, 20, IBAN, 300);
 		
 		try {
@@ -89,8 +83,6 @@ public class AdventureProcessMethodMockTest {
 		
 	}
 	
-	// HotelInterface.reserveHotel lança uma HotelException
-	
 	@Test
 	public void processWithHotelException(@Mocked final BankInterface bankInterface,
 			@Mocked final HotelInterface hotelInterface, @Mocked final ActivityInterface activityInterface) {
@@ -101,8 +93,7 @@ public class AdventureProcessMethodMockTest {
 
 				HotelInterface.reserveHotel(Type.SINGLE, AdventureProcessMethodMockTest.this.begin,
 						AdventureProcessMethodMockTest.this.end);
-				this.result = new HotelException();
-				
+				this.result = new HotelException();			
 			}
 		};
 
@@ -134,7 +125,6 @@ public class AdventureProcessMethodMockTest {
 				ActivityInterface.reserveActivity(AdventureProcessMethodMockTest.this.begin,
 						AdventureProcessMethodMockTest.this.end, 20);
 				this.result = new ActivityException();
-				
 			}
 		};
 
